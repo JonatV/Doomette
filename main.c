@@ -1,7 +1,7 @@
-#include "doomette.h"
+#include "includes/doomette.h"
 
 int	main(void)
 {
-	
+	printf("Hello, world!\n");
 	return 0;
 }
