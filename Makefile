@@ -2,11 +2,17 @@ NAME = doomette
 
 INCPATH = includes/
 MLX_PATH = $(INCPATH)minilibx_linux/
+SRCS_PATH = sources/
+
+HOOKS = $(SRCS_PATH)hooks/
 
 INCLUDES = $(MLX_PATH)mlx.h \
 			$(INCPATH)doomette.h
 
-SRC = main.c
+SRC = main.c \
+		$(HOOKS)close_game.c $(HOOKS)key_hooks.c \
+		$(HOOKS)mouse_hooks.c $(HOOKS)init_hooks.c \
+
 OBJ = $(SRC:.c=.o)
 
 CC = clang
@@ -17,11 +23,14 @@ LIBS = includes/minilibx_linux/libmlx_Linux.a \
 # Separate flags for compilation and linking
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g $(INCS)
 LDFLAGS = -fsanitize=address -g $(LIBS)
+# CFLAGS = -Wall -Wextra -Werror $(INCS)
+# LDFLAGS = $(LIBS)
 
-all: $(NAME)
+all: $(NAME) 
 
 $(NAME): $(OBJ)
 	$(CC) $(OBJ) -o $@ $(LDFLAGS)
+	./$(NAME)
 
 %.o: %.c
 	$(CC) -c $< -o $@ $(CFLAGS)
