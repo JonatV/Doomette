@@ -6,14 +6,15 @@ SRCS_PATH = sources/
 
 HOOKS = $(SRCS_PATH)hooks/
 COLORS = $(SRCS_PATH)colors/
+MAP = $(SRCS_PATH)map/
 
 INCLUDES = $(MLX_PATH)mlx.h \
 			$(INCPATH)doomette.h
 
 SRC = main.c \
-		$(HOOKS)close_game.c $(HOOKS)key_hooks.c \
-		$(HOOKS)mouse_hooks.c $(HOOKS)init_hooks.c \
-		$(COLORS)background.c
+		$(HOOKS)close_game.c $(HOOKS)key_hooks.c $(HOOKS)mouse_hooks.c $(HOOKS)init_hooks.c \
+		$(COLORS)background.c \
+		$(MAP)init_map.c
 
 OBJ = $(SRC:.c=.o)
 

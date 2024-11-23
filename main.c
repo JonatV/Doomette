@@ -21,7 +21,8 @@ int	main(void)
 	sleep(1);
 	game->bg.mlx_img = mlx_new_image(game->mlx, WIN1_SX, WIN1_SY);
 	game->bg.addr = mlx_get_data_addr(game->bg.mlx_img, &game->bg.bpp, &game->bg.line_len, &game->bg.endian);
-	// fill_background(game);
+	// init map
+	init_map(game);
 	init_hooks(game);
 	mlx_loop_hook(game->mlx, &fill_background, game); // dev
 	mlx_loop(game->mlx);

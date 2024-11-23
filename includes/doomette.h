@@ -11,6 +11,9 @@
 #define WIN1_SX 1200
 #define WIN1_SY 600
 
+#define MAP_W 24
+#define MAP_H 24
+
 typedef struct s_img
 {
 	void	*mlx_img;
@@ -28,8 +31,11 @@ typedef struct s_game
 	t_img	bg;
 	int		xpm1_x;
 	int		xpm1_y;
+	int		**map;
 }				t_game;
 
+/*----------------  init_map.c  ---------------*/
+int		init_map(t_game *game);
 
 /*----------------  background.c  ---------------*/
 int		fill_background(t_game *game);
