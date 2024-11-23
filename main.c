@@ -16,15 +16,16 @@ int	main(void)
 		return (1);
 	if (!(game->img1 = mlx_xpm_file_to_image(game->mlx, "assets/textures_xpm/mossy_brick.xpm", &xpm1_x, &xpm1_y)))
 		return (1);
+	// add xpm to the window
 	for (int i = 0; i < WIN1_SX - xpm1_x; i += xpm1_x)
 		mlx_put_image_to_window(game->mlx, game->win1, game->img1, i, i);
 	sleep(1);
+	// fill background with fast display function
 	game->bg.mlx_img = mlx_new_image(game->mlx, WIN1_SX, WIN1_SY);
 	game->bg.addr = mlx_get_data_addr(game->bg.mlx_img, &game->bg.bpp, &game->bg.line_len, &game->bg.endian);
 	// init map
 	init_map(game);
 	init_hooks(game);
-	mlx_loop_hook(game->mlx, &fill_background, game); // dev
 	mlx_loop(game->mlx);
 	return 0;
 }
