@@ -8,18 +8,31 @@
 # include <stdlib.h>
 
 #define TITLE "doomette"
-#define WIN1_SX 800
+#define WIN1_SX 1200
 #define WIN1_SY 600
 
+typedef struct s_img
+{
+	void	*mlx_img;
+	char	*addr;
+	int		bpp; /* bits per pixel */
+	int		line_len;
+	int		endian;
+}	t_img;
 
 typedef struct s_game
 {
 	void	*mlx;	// will be a xvar struct
 	void	*win1;	// will be a t_win_list struct
 	void	*img1;	// will be a t_img struct
+	t_img	bg;
 	int		xpm1_x;
 	int		xpm1_y;
 }				t_game;
+
+
+/*----------------  background.c  ---------------*/
+int		fill_background(t_game *game);
 
 /*----------------  key_hooks.c  ---------------*/
 int		key_win1(int key, void *p);

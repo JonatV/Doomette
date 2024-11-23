@@ -5,6 +5,7 @@ MLX_PATH = $(INCPATH)minilibx_linux/
 SRCS_PATH = sources/
 
 HOOKS = $(SRCS_PATH)hooks/
+COLORS = $(SRCS_PATH)colors/
 
 INCLUDES = $(MLX_PATH)mlx.h \
 			$(INCPATH)doomette.h
@@ -12,6 +13,7 @@ INCLUDES = $(MLX_PATH)mlx.h \
 SRC = main.c \
 		$(HOOKS)close_game.c $(HOOKS)key_hooks.c \
 		$(HOOKS)mouse_hooks.c $(HOOKS)init_hooks.c \
+		$(COLORS)background.c
 
 OBJ = $(SRC:.c=.o)
 
