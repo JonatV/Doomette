@@ -31,19 +31,19 @@ int	draw_map(t_game *game)
 		j = 0;
 		while (j < MAP_W)
 		{
-			if (game->map[i][j] == 1)
+			k = 0;
+			while (k < tile_size - 1)
 			{
-				k = 0;
-				while (k < tile_size)
+				l = 0;
+				while (l < tile_size - 1)
 				{
-					l = 0;
-					while (l < tile_size)
-					{
-						img_pix_put(&game->mini_map,  l+(j*tile_size), k+(i*tile_size),0xFF0000);
-						l++;
-					}
-					k++;
+					if (game->map[i][j] == 1)
+						img_pix_put(&game->mini_map, l+(j*tile_size), k+(i*tile_size),0xFF0000);
+					else
+						img_pix_put(&game->mini_map, l+(j*tile_size), k+(i*tile_size),0x202020);
+					l++;
 				}
+				k++;
 			}
 			j++;
 		}
@@ -80,12 +80,6 @@ int	draw_map(t_game *game)
 				img_pix_put(&game->mini_map, x+i, y+j, 0xFF0000);
 		}
 	}
-	// draw the edge on top of the map draw 
-	for (i = 0; i < MAP_H; i++)
-		for (int cur = 0; cur < MAP_W * tile_size; cur++) img_pix_put(&game->mini_map, cur, i * tile_size, 0xFFFFFF);
-	for (i = 0; i < MAP_W; i++)
-			for (int cur = 0; cur <= MAP_H * tile_size; cur++) img_pix_put(&game->mini_map, i * tile_size, cur, 0xFFFFFF);
-	
 	mlx_put_image_to_window(game->mlx, game->win1, game->mini_map.mlx_img, 0,0);
 	return (0);
 }
