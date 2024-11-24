@@ -14,7 +14,7 @@
 #define MAP_W 12
 #define MAP_H 12
 
-#define MAP_TILE 32
+#define MAP_TILE 50
 
 typedef struct s_img
 {
