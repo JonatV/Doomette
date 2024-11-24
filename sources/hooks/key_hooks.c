@@ -16,6 +16,7 @@ int	key_win1(int key, void *p)
 		game->zoom++;
 		printf("ZOOM = [%d] TILESIZE = [%d]\n", game->zoom, (game->zoom * MAP_TILE)/MAP_H);
 	}
+	move_player(game, key);
 	if (key==XK_1)
 		rectangle(game, 200, 200, 0, 0);
 	if (key==XK_space) // exit game

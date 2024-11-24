@@ -12,7 +12,7 @@ INCLUDES = $(MLX_PATH)mlx.h \
 			$(INCPATH)doomette.h
 
 SRC = main.c \
-		$(HOOKS)close_game.c $(HOOKS)key_hooks.c $(HOOKS)mouse_hooks.c $(HOOKS)init_hooks.c \
+		$(HOOKS)close_game.c $(HOOKS)key_hooks.c $(HOOKS)mouse_hooks.c $(HOOKS)init_hooks.c $(HOOKS)player_hooks.c \
 		$(COLORS)background.c \
 		$(MAP)init_map.c $(MAP)draw_map.c
 

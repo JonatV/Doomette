@@ -47,6 +47,9 @@ typedef struct s_game
 	t_player	player;
 }				t_game;
 
+/*----------------  player_hooks.c  ---------------*/
+int		move_player(t_game *game, int key);
+
 /*----------------  init_map.c  ---------------*/
 int		draw_map(t_game *game);
 

@@ -62,7 +62,7 @@ int	draw_map(t_game *game)
 			l++;
 		}
 		k++;
-	}
+	}	
 	// draw the edge on top of the map draw 
 	for (i = 0; i < MAP_H; i++)
 		for (int cur = 0; cur < MAP_W * tile_size; cur++) img_pix_put(&game->mini_map, cur, i * tile_size, 0xFFFFFF);
