@@ -8,6 +8,26 @@ static void	img_pix_put(t_img *img, int x, int y, int color)
 	*(int *)pixel = color;
 }
 
+static	int draw_vertex(t_img *img, int x0, int y0, int x1, int y1)
+{
+	int dx = abs(x1 - x0);
+	int dy = abs(y1 - y0);
+	int sx = x0 < x1 ? 1 : -1;
+	int sy = y0 < y1 ? 1 : -1;
+	int err = (dx > dy ? dx : -dy) / 2;
+	int e2;
+
+	while (1) {
+		if (x0 >= 0 && x0 < WIN1_SX && y0 >= 0 && y0 < WIN1_SY)
+			img_pix_put(img, x0, y0, 0xFF00FF);
+		if (x0 == x1 && y0 == y1) break;
+		e2 = err;
+		if (e2 > -dx) { err -= dy; x0 += sx; }
+		if (e2 < dy) { err += dx; y0 += sy; }
+	}
+	return (0);
+}
+
 int	draw_map(t_game *game)
 {
 	int	i = 0;
@@ -60,26 +80,11 @@ int	draw_map(t_game *game)
 			img_pix_put(&game->mini_map, start_x+l, start_y+k,0x00FFFF);
 	}
 	// draw player direction
-	int x = start_x + (PLAYER_SIZE/2) - BORDER_W/2;
-	int y = start_y + (PLAYER_SIZE/2) - BORDER_W/2;
-	if (game->player.dir == NORTH)
-		y = start_y-tile_size;
-	else if (game->player.dir == SOUTH)
-		y = start_y+PLAYER_SIZE;
-	else if (game->player.dir == EAST)
-		x = start_x+PLAYER_SIZE;
-	else if (game->player.dir == WEST)
-		x = start_x-tile_size;
-	for(j = 0; j < BORDER_W; j++)
-	{
-		for (i = 0; i < tile_size; i++)
-		{
-			if (game->player.dir == NORTH || game->player.dir == SOUTH)
-				img_pix_put(&game->mini_map, x+j, y+i, 0xFF0000);
-			else
-				img_pix_put(&game->mini_map, x+i, y+j, 0xFF0000);
-		}
-	}
+	int x0 = game->player.x + game->player.size/2;
+	int y0 = game->player.y + game->player.size/2;
+	int x1 = game->player.x + game->player.pdx * 20;
+	int y1 = game->player.y + game->player.pdy * 20;
+	draw_vertex(&game->mini_map, x0, y0, x1, y1);
 	mlx_put_image_to_window(game->mlx, game->win1, game->mini_map.mlx_img, 0,0);
 	return (0);
 }
