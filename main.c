@@ -19,12 +19,11 @@ int	main(void)
 	// add xpm to the window
 	for (int i = 0; i < WIN1_SX - xpm1_x; i += xpm1_x)
 		mlx_put_image_to_window(game->mlx, game->win1, game->img1, i, i);
-	sleep(1);
-	// fill background with fast display function
-	game->bg.mlx_img = mlx_new_image(game->mlx, WIN1_SX, WIN1_SY);
-	game->bg.addr = mlx_get_data_addr(game->bg.mlx_img, &game->bg.bpp, &game->bg.line_len, &game->bg.endian);
+	sleep(2);
 	// init map
 	init_map(game);
+
+	game->zoom = 0;
 	init_hooks(game);
 	mlx_loop(game->mlx);
 	return 0;

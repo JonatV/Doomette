@@ -11,8 +11,10 @@
 #define WIN1_SX 1200
 #define WIN1_SY 600
 
-#define MAP_W 24
-#define MAP_H 24
+#define MAP_W 12
+#define MAP_H 12
+
+#define MAP_TILE 32
 
 typedef struct s_img
 {
@@ -29,6 +31,9 @@ typedef struct s_game
 	void	*win1;	// will be a t_win_list struct
 	void	*img1;	// will be a t_img struct
 	t_img	bg;
+	t_img	shape1;
+	t_img	mini_map;
+	int		zoom;
 	int		xpm1_x;
 	int		xpm1_y;
 	int		**map;
@@ -42,6 +47,7 @@ int		init_map(t_game *game);
 
 /*----------------  background.c  ---------------*/
 int		fill_background(t_game *game);
+int		rectangle(t_game *game, int w, int h, int x, int y);
 
 /*----------------  key_hooks.c  ---------------*/
 int		key_win1(int key, void *p);
