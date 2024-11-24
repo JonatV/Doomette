@@ -14,7 +14,7 @@ INCLUDES = $(MLX_PATH)mlx.h \
 SRC = main.c \
 		$(HOOKS)close_game.c $(HOOKS)key_hooks.c $(HOOKS)mouse_hooks.c $(HOOKS)init_hooks.c \
 		$(COLORS)background.c \
-		$(MAP)init_map.c
+		$(MAP)init_map.c $(MAP)draw_map.c
 
 OBJ = $(SRC:.c=.o)
 

@@ -35,6 +35,9 @@ typedef struct s_game
 }				t_game;
 
 /*----------------  init_map.c  ---------------*/
+int		draw_map(t_game *game);
+
+/*----------------  init_map.c  ---------------*/
 int		init_map(t_game *game);
 
 /*----------------  background.c  ---------------*/
