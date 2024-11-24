@@ -7,23 +7,23 @@ int move_player(t_game *game, int key)
 
 	if (key == XK_Up || key == XK_w)
 	{
-		if (game->map[y - 1][x] == 0)
-			game->player.y--;
+		if (game->map[(y - PLAYER_SPEED) / MAP_TILE][x / MAP_TILE] == 0)
+			game->player.y = game->player.y - PLAYER_SPEED;
 	}
 	if (key == XK_Down || key == XK_s)
 	{
-		if (game->map[y + 1][x] == 0)
-			game->player.y++;
+		if (game->map[(y + PLAYER_SPEED + PLAYER_SIZE/2) / MAP_TILE][x / MAP_TILE] == 0)
+			game->player.y = game->player.y + PLAYER_SPEED;
 	}
 	if (key == XK_Left)
 	{
-		if (game->map[y][x - 1] == 0)
-			game->player.x--;
+		if (game->map[y / MAP_TILE][(x - PLAYER_SPEED) / MAP_TILE] == 0)
+			game->player.x = game->player.x - PLAYER_SPEED;
 	}
 	if (key == XK_Right)
 	{
-		if (game->map[y][x + 1] == 0)
-			game->player.x++;
+		if (game->map[y / MAP_TILE][(x + PLAYER_SPEED + PLAYER_SIZE/2) / MAP_TILE] == 0)
+			game->player.x = game->player.x + PLAYER_SPEED;
 	}
 	if (key==XK_a)
 	{

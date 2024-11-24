@@ -23,6 +23,7 @@
 #define BORDER_W 5
 
 #define PLAYER_SIZE 10
+#define PLAYER_SPEED 10
 
 typedef struct s_img
 {

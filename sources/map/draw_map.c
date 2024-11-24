@@ -50,24 +50,24 @@ int	draw_map(t_game *game)
 		i++;
 	}
 	// draw the player on the map ! player size
-	int start_x = game->player.x * tile_size;
-	int start_y = game->player.y * tile_size;
+	int start_x = game->player.x;
+	int start_y = game->player.y;
 	k = -1;
 	while (++k < game->player.size)
 	{
 		l = -1;
 		while (++l < game->player.size)
-			img_pix_put(&game->mini_map, start_x+l+(tile_size/2)-(game->player.size/2) , start_y+k+(tile_size/2)-(game->player.size/2),0x00FF00);
+			img_pix_put(&game->mini_map, start_x+l, start_y+k,0x00FFFF);
 	}
 	// draw player direction
-	int x = start_x + (tile_size/2) - BORDER_W/2;
-	int y = start_y + (tile_size/2) - BORDER_W/2;
+	int x = start_x + (PLAYER_SIZE/2) - BORDER_W/2;
+	int y = start_y + (PLAYER_SIZE/2) - BORDER_W/2;
 	if (game->player.dir == NORTH)
 		y = start_y-tile_size;
 	else if (game->player.dir == SOUTH)
-		y = start_y+tile_size;
+		y = start_y+PLAYER_SIZE;
 	else if (game->player.dir == EAST)
-		x = start_x+tile_size;
+		x = start_x+PLAYER_SIZE;
 	else if (game->player.dir == WEST)
 		x = start_x-tile_size;
 	for(j = 0; j < BORDER_W; j++)
