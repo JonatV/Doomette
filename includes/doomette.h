@@ -22,6 +22,8 @@
 #define WEST 3
 #define BORDER_W 5
 
+#define PLAYER_SIZE 10
+
 typedef struct s_img
 {
 	void	*mlx_img;
@@ -35,6 +37,7 @@ typedef struct s_player
 {
 	int		x;
 	int		y;
+	int		size; //todo - will have to be zoomed also
 	int		dir;
 }	t_player;
 

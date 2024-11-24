@@ -49,16 +49,16 @@ int	draw_map(t_game *game)
 		}
 		i++;
 	}
-	// draw the player on the map
+	// draw the player on the map ! player size
 	int start_x = game->player.x * tile_size;
 	int start_y = game->player.y * tile_size;
 	k = -1;
-	while (++k < tile_size)
+	while (++k < game->player.size)
 	{
 		l = -1;
-		while (++l < tile_size)
-			img_pix_put(&game->mini_map, start_x+l, start_y+k,0x00FF00);
-	}	
+		while (++l < game->player.size)
+			img_pix_put(&game->mini_map, start_x+l+(tile_size/2)-(game->player.size/2) , start_y+k+(tile_size/2)-(game->player.size/2),0x00FF00);
+	}
 	// draw player direction
 	int x = start_x + (tile_size/2) - BORDER_W/2;
 	int y = start_y + (tile_size/2) - BORDER_W/2;
