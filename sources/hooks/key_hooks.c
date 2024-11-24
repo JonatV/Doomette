@@ -6,6 +6,16 @@ int	key_win1(int key, void *p)
 
 	game = (t_game *)p;
 	printf("Key in Win1 : %x\n",key);
+	if (key==XK_comma)
+	{
+		game->zoom--;
+		printf("ZOOM = [%d] TILESIZE = [%d]\n", game->zoom, (game->zoom * MAP_TILE)/MAP_H);
+	}
+	if (key==XK_period)
+	{
+		game->zoom++;
+		printf("ZOOM = [%d] TILESIZE = [%d]\n", game->zoom, (game->zoom * MAP_TILE)/MAP_H);
+	}
 	if (key==XK_1)
 		rectangle(game, 200, 200, 0, 0);
 	if (key==XK_space) // exit game

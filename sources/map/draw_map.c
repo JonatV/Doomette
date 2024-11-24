@@ -42,6 +42,11 @@ int	draw_map(t_game *game)
 		}
 		i++;
 	}
+	// draw the edge on top of the map draw 
+	for (i = 0; i < MAP_H; i++)
+		for (int cur = 0; cur < MAP_W * tile_size; cur++) img_pix_put(&game->mini_map, cur, i * tile_size, 0xFFFFFF);
+	for (i = 0; i < MAP_W; i++)
+			for (int cur = 0; cur <= MAP_H * tile_size; cur++) img_pix_put(&game->mini_map, i * tile_size, cur, 0xFFFFFF);
 	
 	mlx_put_image_to_window(game->mlx, game->win1, game->mini_map.mlx_img, 0,0);
 	return (0);
