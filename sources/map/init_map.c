@@ -69,7 +69,7 @@ int init_map(t_game *game)
 			{
 				game->player.x = j;
 				game->player.y = i;
-				game->player.dir = 0;
+				game->player.dir = NORTH;
 				game->map[i][j] = 0;
 			}
 		}

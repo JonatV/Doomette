@@ -16,6 +16,12 @@
 
 #define MAP_TILE 50
 
+#define NORTH 0
+#define EAST 1
+#define SOUTH 2
+#define WEST 3
+#define BORDER_W 5
+
 typedef struct s_img
 {
 	void	*mlx_img;

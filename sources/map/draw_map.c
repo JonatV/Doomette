@@ -50,19 +50,36 @@ int	draw_map(t_game *game)
 		i++;
 	}
 	// draw the player on the map
-	i = game->player.y * tile_size;
-	j = game->player.x * tile_size;
-	k = 0;
-	while (k < tile_size)
+	int start_x = game->player.x * tile_size;
+	int start_y = game->player.y * tile_size;
+	k = -1;
+	while (++k < tile_size)
 	{
-		l = 0;
-		while (l < tile_size)
-		{
-			img_pix_put(&game->mini_map,  l+j, k+i,0x00FF00);
-			l++;
-		}
-		k++;
+		l = -1;
+		while (++l < tile_size)
+			img_pix_put(&game->mini_map, start_x+l, start_y+k,0x00FF00);
 	}	
+	// draw player direction
+	int x = start_x + (tile_size/2) - BORDER_W/2;
+	int y = start_y + (tile_size/2) - BORDER_W/2;
+	if (game->player.dir == NORTH)
+		y = start_y-tile_size;
+	else if (game->player.dir == SOUTH)
+		y = start_y+tile_size;
+	else if (game->player.dir == EAST)
+		x = start_x+tile_size;
+	else if (game->player.dir == WEST)
+		x = start_x-tile_size;
+	for(j = 0; j < BORDER_W; j++)
+	{
+		for (i = 0; i < tile_size; i++)
+		{
+			if (game->player.dir == NORTH || game->player.dir == SOUTH)
+				img_pix_put(&game->mini_map, x+j, y+i, 0xFF0000);
+			else
+				img_pix_put(&game->mini_map, x+i, y+j, 0xFF0000);
+		}
+	}
 	// draw the edge on top of the map draw 
 	for (i = 0; i < MAP_H; i++)
 		for (int cur = 0; cur < MAP_W * tile_size; cur++) img_pix_put(&game->mini_map, cur, i * tile_size, 0xFFFFFF);
