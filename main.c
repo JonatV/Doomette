@@ -22,7 +22,6 @@ int	main(void)
 	sleep(2);
 	// init map
 	init_map(game);
-
 	game->zoom = 0;
 	init_hooks(game);
 	mlx_loop(game->mlx);

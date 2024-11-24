@@ -24,6 +24,8 @@ int	draw_map(t_game *game)
 	game->mini_map.addr = mlx_get_data_addr(game->mini_map.mlx_img, &game->mini_map.bpp, &game->mini_map.line_len, &game->mini_map.endian);
 	
 	int tile_size = MAP_TILE + game->zoom;
+
+	// draw map squares
 	while (i < MAP_H)
 	{
 		j = 0;
@@ -46,6 +48,20 @@ int	draw_map(t_game *game)
 			j++;
 		}
 		i++;
+	}
+	// draw the player on the map
+	i = game->player.y * tile_size;
+	j = game->player.x * tile_size;
+	k = 0;
+	while (k < tile_size)
+	{
+		l = 0;
+		while (l < tile_size)
+		{
+			img_pix_put(&game->mini_map,  l+j, k+i,0x00FF00);
+			l++;
+		}
+		k++;
 	}
 	// draw the edge on top of the map draw 
 	for (i = 0; i < MAP_H; i++)

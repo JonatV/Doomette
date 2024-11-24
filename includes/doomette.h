@@ -25,6 +25,13 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
+typedef struct s_player
+{
+	int		x;
+	int		y;
+	int		dir;
+}	t_player;
+
 typedef struct s_game
 {
 	void	*mlx;	// will be a xvar struct
@@ -37,6 +44,7 @@ typedef struct s_game
 	int		xpm1_x;
 	int		xpm1_y;
 	int		**map;
+	t_player	player;
 }				t_game;
 
 /*----------------  init_map.c  ---------------*/
