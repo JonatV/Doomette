@@ -2,40 +2,60 @@
 
 int move_player(t_game *game, int key)
 {
-	int x = game->player.x;
-	int y = game->player.y;
+	float x = game->player.x;
+	float y = game->player.y;
 
-	if (key == XK_Up || key == XK_w)
+	if (key == XK_Up)
 	{
-		if (game->map[(y - PLAYER_SPEED) / MAP_TILE][x / MAP_TILE] == 0)
+		if (game->map[(int)(y - PLAYER_SPEED) / MAP_TILE][(int)x / MAP_TILE] == 0)
 			game->player.y = game->player.y - PLAYER_SPEED;
 	}
-	if (key == XK_Down || key == XK_s)
+	if (key == XK_Down)
 	{
-		if (game->map[(y + PLAYER_SPEED + PLAYER_SIZE/2) / MAP_TILE][x / MAP_TILE] == 0)
+		if (game->map[(int)(y + PLAYER_SPEED + PLAYER_SIZE/2) / MAP_TILE][(int)x / MAP_TILE] == 0)
 			game->player.y = game->player.y + PLAYER_SPEED;
 	}
 	if (key == XK_Left)
 	{
-		if (game->map[y / MAP_TILE][(x - PLAYER_SPEED) / MAP_TILE] == 0)
+		if (game->map[(int)y / MAP_TILE][(int)(x - PLAYER_SPEED) / MAP_TILE] == 0)
 			game->player.x = game->player.x - PLAYER_SPEED;
 	}
 	if (key == XK_Right)
 	{
-		if (game->map[y / MAP_TILE][(x + PLAYER_SPEED + PLAYER_SIZE/2) / MAP_TILE] == 0)
+		if (game->map[(int)y / MAP_TILE][(int)(x + PLAYER_SPEED + PLAYER_SIZE/2) / MAP_TILE] == 0)
 			game->player.x = game->player.x + PLAYER_SPEED;
 	}
 	if (key==XK_a)
 	{
-		game->player.dir--;
-		if (game->player.dir == -1)
-			game->player.dir = 3;
+		game->player.pa -= 0.1;
+		if (game->player.pa < 0)
+			game->player.pa += 2 * PI;
+		game->player.pdx = cos(game->player.pa) * 5;
+		game->player.pdy = sin(game->player.pa) * 5;
 	}
 	if (key==XK_d)
 	{
-		game->player.dir++;
-		if (game->player.dir == 4)
-			game->player.dir = 0;
+		game->player.pa += 0.1;
+		if (game->player.pa > 2 * PI)
+			game->player.pa -= 2 * PI;
+		game->player.pdx = cos(game->player.pa) * 5;
+		game->player.pdy = sin(game->player.pa) * 5;
+	}
+	if (key==XK_w)
+	{
+		if (game->map[(int)(y + game->player.pdy) / MAP_TILE][(int)(x + game->player.pdx) / MAP_TILE] == 0)
+		{
+			game->player.x = game->player.x + game->player.pdx;
+			game->player.y = game->player.y + game->player.pdy;
+		}
+	}
+	if (key==XK_s)
+	{
+		if (game->map[(int)(y - game->player.pdy) / MAP_TILE][(int)(x - game->player.pdx) / MAP_TILE] == 0)
+		{
+			game->player.x = game->player.x - game->player.pdx;
+			game->player.y = game->player.y - game->player.pdy;
+		}
 	}
 	return (0);
 }

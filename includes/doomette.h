@@ -6,6 +6,9 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <math.h>
+
+# define PI 3.1415926535
 
 #define TITLE "doomette"
 #define WIN1_SX 1200
@@ -20,9 +23,8 @@
 #define EAST 1
 #define SOUTH 2
 #define WEST 3
-#define BORDER_W 5
 
-#define PLAYER_SIZE 10
+#define PLAYER_SIZE 11
 #define PLAYER_SPEED 10
 
 typedef struct s_img
@@ -36,8 +38,11 @@ typedef struct s_img
 
 typedef struct s_player
 {
-	int		x;
-	int		y;
+	float		x;
+	float		y;
+	float	pa;  // player angle
+	float	pdx; // player delta x
+	float	pdy; // player delta y
 	int		size; //todo - will have to be zoomed also
 	int		dir;
 }	t_player;

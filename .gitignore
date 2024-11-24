@@ -1,3 +1,4 @@
 *.o
 doomette
 .vscode/settings.json
+.todo

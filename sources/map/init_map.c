@@ -71,6 +71,9 @@ int init_map(t_game *game)
 				game->player.y = i * MAP_TILE;
 				game->player.dir = NORTH;
 				game->player.size = PLAYER_SIZE;
+				game->player.pa = 0;
+				game->player.pdx = cos(game->player.pa) * 5;
+				game->player.pdy = sin(game->player.pa) * 5;
 				game->map[i][j] = 0;
 			}
 		}
