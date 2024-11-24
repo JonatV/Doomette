@@ -2,6 +2,7 @@
 
 int init_map(t_game *game)
 {
+	game->mini_map.mlx_img = NULL;
 	game->map = malloc(sizeof(int *) * MAP_W);
 	if (!game->map)
 		return (1);

@@ -14,7 +14,12 @@ int	draw_map(t_game *game)
 	int	j = 0;
 	int k = 0;
 	int l = 0;
-
+	
+	if (game->mini_map.mlx_img)
+	{
+		mlx_destroy_image(game->mlx, game->mini_map.mlx_img);
+		game->mini_map.mlx_img = NULL;
+	}
 	game->mini_map.mlx_img = mlx_new_image(game->mlx, WIN1_SX, WIN1_SY);
 	game->mini_map.addr = mlx_get_data_addr(game->mini_map.mlx_img, &game->mini_map.bpp, &game->mini_map.line_len, &game->mini_map.endian);
 	
