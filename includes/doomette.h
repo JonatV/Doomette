@@ -27,7 +27,7 @@
 #define SOUTH 2
 #define WEST 3
 
-#define PLAYER_SIZE 11
+#define PLAYER_SIZE 1
 #define PLAYER_SPEED 10
 
 typedef struct s_img
