@@ -20,7 +20,12 @@ int	key_win1(int key, void *p)
 	if (key==XK_1)
 		rectangle(game, 200, 200, 0, 0);
 	if (key==XK_space) // exit game
-		mlx_clear_window(game->mlx, game->win1);
+	{
+		if (!game->zoom)
+			game->zoom = -32;
+		else
+			game->zoom = 0;
+	}
 	if (key==XK_Escape) // exit game
 		close_game(game);
 	return (0);
