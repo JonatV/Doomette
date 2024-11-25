@@ -8,7 +8,10 @@
 # include <stdlib.h>
 # include <math.h>
 
+# define DR 0.0174533
 # define PI 3.1415926535
+# define P2 PI/2
+# define P3 3*PI/2
 
 #define TITLE "doomette"
 #define WIN1_SX 1200
