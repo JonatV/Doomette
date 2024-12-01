@@ -5,7 +5,7 @@ int move_player(t_game *game, int key)
 	float x = game->player.x;
 	float y = game->player.y;
 	// int tile_size = MAP_TILE + game->zoom;//wip
-	int tile_size = game->tile;
+	int tile_size = game->mini_map.tile;
 
 	if (key == XK_Up)
 	{

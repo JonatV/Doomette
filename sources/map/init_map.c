@@ -2,7 +2,7 @@
 
 int init_map(t_game *game)
 {
-	game->mini_map.mlx_img = NULL;
+	game->mini_map.img.mlx_img = NULL;
 	game->map = malloc(sizeof(int *) * MAP_W);
 	if (!game->map)
 		return (1);
@@ -48,9 +48,9 @@ int init_map(t_game *game)
 
 	int temp_map[MAP_H][MAP_W] = {
 		{1,1,1,1,1,1,1,1,1,1,1,1},
-		{1,0,0,1,1,1,0,0,0,0,0,1},
+		{1,2,0,1,1,1,0,0,0,0,0,1},
 		{1,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,2,0,0,1,0,0,0,0,1,1},
+		{1,0,0,0,0,1,0,0,0,0,1,1},
 		{1,0,0,0,0,0,0,0,0,0,0,1},
 		{1,0,0,0,1,0,1,0,0,0,0,1},
 		{1,0,0,1,1,1,1,1,0,0,0,1},
@@ -67,11 +67,13 @@ int init_map(t_game *game)
 			game->map[i][j] = temp_map[i][j];
 			if (game->map[i][j] == 2)
 			{
-				game->tile = MAP_TILE;
-				game->map_focus = false;
+				game->mini_map.tile = MAP_TILE;
+				game->mini_map.map_focus = false;
+				game->mini_map.width = 150;
+				game->mini_map.height = 150;
 				game->zoom = 0;
-				game->player.x = j * game->tile;
-				game->player.y = i * game->tile;
+				game->player.x = j * game->mini_map.tile;
+				game->player.y = i * game->mini_map.tile;
 				game->player.dir = NORTH;
 				game->player.size = PLAYER_SIZE;
 				game->player.pa = 0;
