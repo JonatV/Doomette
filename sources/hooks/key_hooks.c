@@ -19,12 +19,25 @@ int	key_win1(int key, void *p)
 	move_player(game, key);
 	if (key==XK_1)
 		rectangle(game, 200, 200, 0, 0);
-	if (key==XK_space) // exit game
+	if (key==XK_space) // toggle map focus
 	{
-		if (!game->zoom)
-			game->zoom = -32;
+		game->map_focus = !game->map_focus;
+		if (game->map_focus)
+		{
+			game->player.x = game->player.x/(float)game->tile;
+			game->player.y = game->player.y/(float)game->tile;
+			game->tile = MAP_BIG_TILE;
+			game->player.x *= game->tile;
+			game->player.y *= game->tile;
+		}
 		else
-			game->zoom = 0;
+		{
+			game->player.x = game->player.x/(float)game->tile;
+			game->player.y = game->player.y/(float)game->tile;
+			game->tile = MAP_LOW_TILE;
+			game->player.x *= game->tile;
+			game->player.y *= game->tile;
+		}
 	}
 	if (key==XK_Escape) // exit game
 		close_game(game);

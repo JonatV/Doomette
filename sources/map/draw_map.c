@@ -36,7 +36,7 @@ static float	dist(float ax, float ay, float bx, float by)
 static int	draw_rays(t_game *game)
 {
 	int r,mx,my,mp,dof; float rx,ry,ra,xo,yo;
-	int tile_size = MAP_TILE + game->zoom;
+	int tile_size = game->tile;
 	// ra = game->player.pa-DR*30; if (ra < 0) { ra += 2*PI; } if (ra > 2*PI) { ra -= 2*PI; }
 	ra = game->player.pa - DR * 30;
 	ra = fmod(ra, 2*PI);	// Normalize angle
@@ -98,6 +98,20 @@ static int	draw_rays(t_game *game)
 	return (0);
 }
 
+// void crop_img(t_img *img, int w, int h)
+// {
+// 	for (int y = 0; y < 600; y++)
+// 	{
+// 		for (int x = 0; x < WIN1_SX; x++)
+// 		{
+// 			if (x >= w || y >= h)
+// 			{
+// 				img_pix_put(img, x, y, 0x00FFFF);
+// 			}
+// 		}
+// 	}
+// }
+
 int	draw_map(t_game *game)
 {
 	int	i = 0;
@@ -113,7 +127,8 @@ int	draw_map(t_game *game)
 	game->mini_map.mlx_img = mlx_new_image(game->mlx, WIN1_SX, WIN1_SY);
 	game->mini_map.addr = mlx_get_data_addr(game->mini_map.mlx_img, &game->mini_map.bpp, &game->mini_map.line_len, &game->mini_map.endian);
 	
-	int tile_size = MAP_TILE + game->zoom;
+	int tile_size;
+	tile_size = game->tile;
 
 	// draw map's tiles
 	while (i < MAP_H)
@@ -122,10 +137,10 @@ int	draw_map(t_game *game)
 		while (j < MAP_W)
 		{
 			k = 0;
-			while (k < tile_size - 1)
+			while (k < tile_size)
 			{
 				l = 0;
-				while (l < tile_size - 1)
+				while (l < tile_size)
 				{
 					if (game->map[i][j] == 1)
 						img_pix_put(&game->mini_map, l+(j*tile_size), k+(i*tile_size),0xFF0000);
@@ -148,7 +163,7 @@ int	draw_map(t_game *game)
 	{
 		l = -1;
 		while (++l < game->player.size)
-			img_pix_put(&game->mini_map, start_x+l + game->zoom, start_y+k+game->zoom,0x00FFFF);
+			img_pix_put(&game->mini_map, start_x+l, start_y+k, 0x00FFFF);
 	}
 	
 	// // draw player direction
@@ -161,7 +176,9 @@ int	draw_map(t_game *game)
 	//draw the ray representing the player's view
 	draw_rays(game);
 
+	// crop_img(&game->mini_map, 100, 100);
 	// draw the final image
 	mlx_put_image_to_window(game->mlx, game->win1, game->mini_map.mlx_img, 0,0);
 	return (0);
 }
+

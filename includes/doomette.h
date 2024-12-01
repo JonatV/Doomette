@@ -6,6 +6,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdbool.h>
 # include <math.h>
 
 # define DR 0.0174533
@@ -20,7 +21,9 @@
 #define MAP_W 12
 #define MAP_H 12
 
-#define MAP_TILE 50
+#define MAP_TILE 30
+#define MAP_LOW_TILE 30
+#define MAP_BIG_TILE 50
 
 #define NORTH 0
 #define EAST 1
@@ -62,6 +65,9 @@ typedef struct s_game
 	int		xpm1_x;
 	int		xpm1_y;
 	int		**map;
+
+	bool	map_focus; // to know wether the map is in big or not
+	int		tile; // size of one tile
 	t_player	player;
 }				t_game;
 

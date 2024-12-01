@@ -48,9 +48,9 @@ int init_map(t_game *game)
 
 	int temp_map[MAP_H][MAP_W] = {
 		{1,1,1,1,1,1,1,1,1,1,1,1},
-		{1,2,0,0,0,1,0,0,0,0,1,1},
 		{1,0,0,1,1,1,0,0,0,0,0,1},
 		{1,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,2,0,0,1,0,0,0,0,1,1},
 		{1,0,0,0,0,0,0,0,0,0,0,1},
 		{1,0,0,0,1,0,1,0,0,0,0,1},
 		{1,0,0,1,1,1,1,1,0,0,0,1},
@@ -67,8 +67,11 @@ int init_map(t_game *game)
 			game->map[i][j] = temp_map[i][j];
 			if (game->map[i][j] == 2)
 			{
-				game->player.x = j * MAP_TILE;
-				game->player.y = i * MAP_TILE;
+				game->tile = MAP_TILE;
+				game->map_focus = false;
+				game->zoom = 0;
+				game->player.x = j * game->tile;
+				game->player.y = i * game->tile;
 				game->player.dir = NORTH;
 				game->player.size = PLAYER_SIZE;
 				game->player.pa = 0;
