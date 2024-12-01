@@ -30,7 +30,7 @@
 #define SOUTH 2
 #define WEST 3
 
-#define PLAYER_SIZE 10
+#define PLAYER_SIZE 1
 #define PLAYER_SPEED 10
 
 typedef struct s_img
@@ -74,6 +74,7 @@ typedef struct s_game
 	int		xpm1_x;
 	int		xpm1_y;
 	int		**map;
+	bool	udpate_win1;
 
 	// MINI MAP
 	t_mini_map	mini_map;

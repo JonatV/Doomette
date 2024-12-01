@@ -23,6 +23,7 @@ int	main(void)
 	// init map
 	init_map(game);
 	game->zoom = 0;
+	game->udpate_win1 = false;
 	init_hooks(game);
 	mlx_loop(game->mlx);
 	return 0;

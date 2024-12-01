@@ -5,6 +5,7 @@ int	key_win1(int key, void *p)
 	t_game	*game;
 
 	game = (t_game *)p;
+	game->udpate_win1 = true;
 	printf("Key in Win1 : %x\n",key);
 	if (key==XK_comma)
 	{

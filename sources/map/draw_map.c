@@ -118,8 +118,13 @@ int	draw_map(t_game *game)
 	int	j = 0;
 	int k = 0;
 	int l = 0;
-	
-	if (game->mini_map.mlx_img)
+	// fill the all windows with black
+	if (game->udpate_win1)
+	{
+		mlx_clear_window(game->mlx, game->win1);
+		game->udpate_win1 = false;
+		return (0);
+	}
 	{
 		mlx_destroy_image(game->mlx, game->mini_map.mlx_img);
 		game->mini_map.mlx_img = NULL;
