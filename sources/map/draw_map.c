@@ -255,7 +255,7 @@ int	draw_map(t_game *game)
 	if (game->mini_map.map_focus)
 		mlx_put_image_to_window(game->mlx, game->win1, game->mini_map.img.mlx_img, (WIN1_SX/2) - (MAP_W * game->mini_map.tile)/2 ,(WIN1_SY/2) - (MAP_H * game->mini_map.tile)/2);
 	else
-		mlx_put_image_to_window(game->mlx, game->win1, game->mini_map.img.mlx_img, (WIN1_SX/2) - game->mini_map.width/2 ,(WIN1_SY/2) - game->mini_map.height/2);
+		mlx_put_image_to_window(game->mlx, game->win1, game->mini_map.img.mlx_img, 10, 10);
 	return (0);
 }
 
