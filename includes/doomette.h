@@ -30,7 +30,7 @@
 #define SOUTH 2
 #define WEST 3
 
-#define PLAYER_SIZE 1
+#define PLAYER_SIZE 10
 #define PLAYER_SPEED 10
 
 typedef struct s_img
@@ -53,6 +53,16 @@ typedef struct s_player
 	int		dir;
 }	t_player;
 
+typedef struct s_mini_map
+{
+	t_img	img;
+	float	width;
+	float	height;
+	int		tile; // size of one tile
+	bool	map_focus; // to know wether the map is in big or not
+	
+}	t_mini_map;
+
 typedef struct s_game
 {
 	void	*mlx;	// will be a xvar struct
@@ -60,14 +70,15 @@ typedef struct s_game
 	void	*img1;	// will be a t_img struct
 	t_img	bg;
 	t_img	shape1;
-	t_img	mini_map;
 	int		zoom;
 	int		xpm1_x;
 	int		xpm1_y;
 	int		**map;
 
-	bool	map_focus; // to know wether the map is in big or not
-	int		tile; // size of one tile
+	// MINI MAP
+	t_mini_map	mini_map;
+	
+	// PLAYER
 	t_player	player;
 }				t_game;
 
