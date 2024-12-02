@@ -20,7 +20,7 @@ int	rectangle(t_game *game, int w, int h, int x, int y)
 	return (0);
 }
 
-int	fill_background(t_game *game)
+int	prepare_background(t_game *game)
 {
 	int i = 0;
 	int j = 0;
@@ -39,6 +39,5 @@ int	fill_background(t_game *game)
 		}
 		i++;
 	}
-	mlx_put_image_to_window(game->mlx, game->win1, game->bg.mlx_img, 0, 0);
 	return (0);
 }

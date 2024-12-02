@@ -14,6 +14,7 @@ int	init_game(t_game **game)
 	init_player(*game);
 	(*game)->udpate_win1 = true;
 	(*game)->zoom = 0;
+	prepare_background(*game);
 	(*game)->game_screen.mlx_img = NULL;
 	return 0;
 }

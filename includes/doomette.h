@@ -147,6 +147,6 @@ void		init_minimap(t_game *game);
 
 /*----------------  background.c  ---------------*/
 int		rectangle(t_game *game, int w, int h, int x, int y);
-int		fill_background(t_game *game);
+int		prepare_background(t_game *game);
 
 # endif
