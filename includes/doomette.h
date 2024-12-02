@@ -94,6 +94,11 @@ typedef struct s_game
 	// MISC
 	int			zoom;
 }				t_game;
+/*----------------  draw_rectangle.c  ---------------*/
+int		draw_rectangle(t_game *game, int w, int h, int x, int y);
+
+/*----------------  draw_square.c  ---------------*/
+int		draw_square(t_game *game, int side, int x, int y);
 
 /*----------------  draw_vertex.c  ---------------*/
 int		draw_vertex(t_img *img, int x0, int y0, int x1, int y1);
