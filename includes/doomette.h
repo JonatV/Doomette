@@ -7,6 +7,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdbool.h>
+# include <string.h>
 # include <math.h>
 
 # define DR 0.0174533
@@ -63,50 +64,82 @@ typedef struct s_mini_map
 	
 }	t_mini_map;
 
+typedef struct s_xpm
+{
+	void	*img;
+	int		x;
+	int		y;
+}	t_xpm;
+
 typedef struct s_game
 {
-	void	*mlx;	// will be a xvar struct
-	void	*win1;	// will be a t_win_list struct
-	void	*img1;	// will be a t_img struct
-	t_img	bg;
-	t_img	shape1;
-	int		zoom;
-	int		xpm1_x;
-	int		xpm1_y;
-	int		**map;
-	bool	udpate_win1;
+	void		*mlx;	// will be a xvar struct
+	void		*win1;	// will be a t_win_list struct
+
+	// GRAPHICS
+	t_xpm		mossy_brick;
+	t_img		bg;
+	t_img		shape1;
+
+	// MAP
+	int			**map;
 
 	// MINI MAP
+	bool		udpate_win1;
 	t_mini_map	mini_map;
 	
 	// PLAYER
 	t_player	player;
+
+	// MISC
+	int			zoom;
 }				t_game;
+
+/*----------------  draw_vertex.c  ---------------*/
+int		draw_vertex(t_img *img, int x0, int y0, int x1, int y1);
+
+/*----------------  optimization_helper.c  ---------------*/
+void	img_pix_put(t_img *img, int x, int y, int color);
+
+/*----------------  draw_minimap.c  ---------------*/
+int		draw_minimap(t_game *game);
+
+/*----------------  draw_rays.c  ---------------*/
+int		draw_rays(t_game *game);
+
+/*----------------  render_all.c  ---------------*/
+int		render_all(t_game *game);
 
 /*----------------  player_hooks.c  ---------------*/
 int		move_player(t_game *game, int key);
 
-/*----------------  init_map.c  ---------------*/
-int		draw_map(t_game *game);
-
-/*----------------  init_map.c  ---------------*/
-int		init_map(t_game *game);
-
-/*----------------  background.c  ---------------*/
-int		fill_background(t_game *game);
-int		rectangle(t_game *game, int w, int h, int x, int y);
+/*----------------  close_game.c  ---------------*/
+int		close_game(void *p);
 
 /*----------------  key_hooks.c  ---------------*/
 int		key_win1(int key, void *p);
 
-/*----------------  close_game.c  ---------------*/
-int		close_game(void *p);
+/*----------------  mouse_hooks.c  ---------------*/
+int		mouse_move_win1(int x, int y, void *p);
+int		mouse_btn_win1(int key, void *p);
 
 /*----------------  init_hooks.c  ---------------*/
 void	init_hooks(t_game *game);
 
-/*----------------  mouse_hooks.c  ---------------*/
-int		mouse_move_win1(int x, int y, void *p);
-int		mouse_btn_win1(int key, void *p);
+/*----------------  init_player_struct.c  ---------------*/
+void	init_player(t_game *game);
+
+/*----------------  init_map_struct.c  ---------------*/
+int		init_map(t_game *game);
+
+/*----------------  init_game_struct.c  ---------------*/
+int		init_game(t_game **game);
+
+/*----------------  init_minimap_struct.c  ---------------*/
+void	init_minimap(t_game *game);
+
+/*----------------  background.c  ---------------*/
+int		rectangle(t_game *game, int w, int h, int x, int y);
+int		fill_background(t_game *game);
 
 # endif

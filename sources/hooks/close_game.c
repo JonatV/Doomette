@@ -7,7 +7,7 @@ int close_game(void *p)
 	game = (t_game *)p;
 	mlx_clear_window(game->mlx, game->win1);
 	mlx_destroy_window(game->mlx, game->win1);
-	mlx_destroy_image(game->mlx, game->img1);
+	mlx_destroy_image(game->mlx, game->mossy_brick.img);
 	mlx_destroy_image(game->mlx, game->mini_map.img.mlx_img);
 
 	for (int i = 0; i < MAP_W; i++)

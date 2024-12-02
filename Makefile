@@ -4,17 +4,20 @@ INCPATH = includes/
 MLX_PATH = $(INCPATH)minilibx_linux/
 SRCS_PATH = sources/
 
+INIT = $(SRCS_PATH)init/
 HOOKS = $(SRCS_PATH)hooks/
 COLORS = $(SRCS_PATH)colors/
 MAP = $(SRCS_PATH)map/
+RENDER = $(SRCS_PATH)render/
 
 INCLUDES = $(MLX_PATH)mlx.h \
 			$(INCPATH)doomette.h
 
 SRC = main.c \
+		$(INIT)init_game_struct.c $(INIT)init_player_struct.c $(INIT)init_map_struct.c $(INIT)init_minimap_struct.c \
 		$(HOOKS)close_game.c $(HOOKS)key_hooks.c $(HOOKS)mouse_hooks.c $(HOOKS)init_hooks.c $(HOOKS)player_hooks.c \
 		$(COLORS)background.c \
-		$(MAP)init_map.c $(MAP)draw_map.c
+		$(RENDER)render_all.c $(RENDER)draw_minimap.c $(RENDER)draw_rays.c $(RENDER)draw_vertex.c $(RENDER)optimization_helper.c
 
 OBJ = $(SRC:.c=.o)
 

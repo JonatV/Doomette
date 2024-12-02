@@ -1,14 +1,5 @@
 #include "../../includes/doomette.h"
 
-//https://aurelienbrabant.fr/blog/pixel-drawing-with-the-minilibx
-static void	img_pix_put(t_img *img, int x, int y, int color)
-{
-	char	*pixel;
-
-	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
-	*(int *)pixel = color;
-}
-
 int	rectangle(t_game *game, int w, int h, int x, int y)
 {
 	int i = 0, j = 0;
