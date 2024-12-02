@@ -80,6 +80,7 @@ typedef struct s_game
 	t_xpm		mossy_brick;
 	t_img		bg;
 	t_img		shape1;
+	t_img		game_screen;
 
 	// MAP
 	int			**map;
@@ -94,6 +95,7 @@ typedef struct s_game
 	// MISC
 	int			zoom;
 }				t_game;
+
 /*----------------  draw_rectangle.c  ---------------*/
 int		draw_rectangle(t_game *game, int w, int h, int x, int y);
 
@@ -129,10 +131,10 @@ int		mouse_move_win1(int x, int y, void *p);
 int		mouse_btn_win1(int key, void *p);
 
 /*----------------  init_hooks.c  ---------------*/
-void	init_hooks(t_game *game);
+void		init_hooks(t_game *game);
 
 /*----------------  init_player_struct.c  ---------------*/
-void	init_player(t_game *game);
+void		init_player(t_game *game);
 
 /*----------------  init_map_struct.c  ---------------*/
 int		init_map(t_game *game);
@@ -141,7 +143,7 @@ int		init_map(t_game *game);
 int		init_game(t_game **game);
 
 /*----------------  init_minimap_struct.c  ---------------*/
-void	init_minimap(t_game *game);
+void		init_minimap(t_game *game);
 
 /*----------------  background.c  ---------------*/
 int		rectangle(t_game *game, int w, int h, int x, int y);

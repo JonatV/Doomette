@@ -160,10 +160,20 @@ int	draw_minimap(t_game *game)
 		mlx_destroy_image(game->mlx, game->mini_map.img.mlx_img);
 		game->mini_map.img.mlx_img = NULL;
 	}
+	if (game->game_screen.mlx_img)
+	{
+		mlx_destroy_image(game->mlx, game->game_screen.mlx_img);
+		game->game_screen.mlx_img = NULL;
+	}
 	// handle minimap modes
+
+	game->game_screen.mlx_img = mlx_new_image(game->mlx, WIN1_SX, WIN1_SY);
+	game->game_screen.addr = mlx_get_data_addr(game->game_screen.mlx_img, &game->game_screen.bpp, &game->game_screen.line_len, &game->game_screen.endian);
+	
 	minimap_mode_fullscreen(game);
 	minimap_mode_corner(game);
 	// draw the final image in the middle of the screen
+	mlx_put_image_to_window(game->mlx, game->win1, game->mini_map.img.mlx_img, 0, 0);
 	if (game->mini_map.map_focus)
 		mlx_put_image_to_window(game->mlx, game->win1, game->mini_map.img.mlx_img, (WIN1_SX/2) - (MAP_W * game->mini_map.tile)/2 ,(WIN1_SY/2) - (MAP_H * game->mini_map.tile)/2);
 	else
