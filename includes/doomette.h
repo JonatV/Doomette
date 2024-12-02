@@ -61,7 +61,7 @@ typedef struct s_mini_map
 	float	height;
 	int		tile; // size of one tile
 	bool	map_focus; // to know wether the map is in big or not
-	
+	bool	is_square; // to know if the map is a square or circle
 }	t_mini_map;
 
 typedef struct s_xpm

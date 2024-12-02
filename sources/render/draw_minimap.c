@@ -1,5 +1,53 @@
 #include "../../includes/doomette.h"
 
+static int minimap_shape_circle(t_game *game)
+{
+	if (game->mini_map.is_square)
+		return (0);
+	int i, j;
+	// now i will replace points on the img with black to make it look like a circle
+		for(i = 0; i < game->mini_map.height; i++)
+		{
+			for(j = 0; j < game->mini_map.width; j++)
+			{
+				if (sqrt(pow(j - game->mini_map.width/2, 2) + pow(i - game->mini_map.height/2, 2)) > game->mini_map.width/2)
+					img_pix_put(&game->mini_map.img, j, i, 0x000000);
+			}
+		}
+		// add white outline on the border now that the circle is done
+		for (i = 0; i < game->mini_map.height; i++)
+		{
+			for (j = 0; j < game->mini_map.width; j++)
+			{
+				if (sqrt(pow(j - game->mini_map.width/2, 2) + pow(i - game->mini_map.height/2, 2)) > game->mini_map.width/2 - 1 &&
+					sqrt(pow(j - game->mini_map.width/2, 2) + pow(i - game->mini_map.height/2, 2)) < game->mini_map.width/2)
+					img_pix_put(&game->mini_map.img, j, i, 0xFFFFFF);
+			}
+		}
+	return (0);
+}
+
+static int minimap_shape_square(t_game *game)
+{
+	if (!(game->mini_map.is_square))
+		return (0);
+	int i, j;
+	// draw the outline
+	i = 0;
+	while (i < game->mini_map.height)
+	{
+		j = 0;
+		while (j < game->mini_map.width)
+		{
+			if (i == 0 || i == game->mini_map.height - 1 || j == 0 || j == game->mini_map.width - 1)
+				img_pix_put(&game->mini_map.img, j, i, 0xFFFFFF);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
 static int minimap_mode_fullscreen(t_game *game)
 {
 	int	i, j, k, l;
@@ -94,25 +142,8 @@ static int minimap_mode_corner(t_game *game)
 		}
 		//draw the ray representing the player's view
 		draw_rays(game);
-		// now i will replace points on the img with black to make it look like a circle
-		for(i = 0; i < game->mini_map.height; i++)
-		{
-			for(j = 0; j < game->mini_map.width; j++)
-			{
-				if (sqrt(pow(j - game->mini_map.width/2, 2) + pow(i - game->mini_map.height/2, 2)) > game->mini_map.width/2)
-					img_pix_put(&game->mini_map.img, j, i, 0x000000);
-			}
-		}
-		// add white outline on the border now that the circle is done
-		for (i = 0; i < game->mini_map.height; i++)
-		{
-			for (j = 0; j < game->mini_map.width; j++)
-			{
-				if (sqrt(pow(j - game->mini_map.width/2, 2) + pow(i - game->mini_map.height/2, 2)) > game->mini_map.width/2 - 1 &&
-					sqrt(pow(j - game->mini_map.width/2, 2) + pow(i - game->mini_map.height/2, 2)) < game->mini_map.width/2)
-					img_pix_put(&game->mini_map.img, j, i, 0xFFFFFF);
-			}
-		}
+		minimap_shape_circle(game);
+		minimap_shape_square(game);
 	}
 	return (0);
 }

@@ -19,7 +19,10 @@ int	key_win1(int key, void *p)
 	}
 	move_player(game, key);
 	if (key==XK_1)
-		rectangle(game, 200, 200, 0, 0);
+	{
+		game->mini_map.is_square = !game->mini_map.is_square;
+		game->mini_map.map_focus = false;
+	}
 	if (key==XK_space) // toggle map focus
 	{
 		game->mini_map.map_focus = !game->mini_map.map_focus;
