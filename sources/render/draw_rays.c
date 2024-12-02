@@ -87,16 +87,10 @@ int	draw_rays(t_game *game)
 		{
 			for (int w = 0; w < 16; w++)
 			{
-				mlx_pixel_put(game->mlx, game->win1, x + w, y, color);
+				img_pix_put(&game->game_screen, x + w, y, color);
 			}
 		}
 
-		// draw the line from top to bottom
-		// while (y_top < y_bot)
-		// {
-		// 	mlx_pixel_put(game->mlx, game->win1, x, y_top, color);
-		// 	y_top++;
-		// }
 		// ra += DR; if (ra < 0) { ra += 2*PI; } if (ra > 2*PI) { ra -= 2*PI; }
 		ra += DR;
 		ra = fmod(ra, 2*PI);

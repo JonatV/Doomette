@@ -154,7 +154,7 @@ int	draw_minimap(t_game *game)
 	if (!(game->udpate_win1))
 		return (0);
 	game->udpate_win1 = false;
-	mlx_clear_window(game->mlx, game->win1);
+	mlx_clear_window(game->mlx, game->win1); // -> not recommended lets add a black image to put on top instead
 	if (game->mini_map.img.mlx_img)
 	{
 		mlx_destroy_image(game->mlx, game->mini_map.img.mlx_img);
@@ -173,7 +173,7 @@ int	draw_minimap(t_game *game)
 	minimap_mode_fullscreen(game);
 	minimap_mode_corner(game);
 	// draw the final image in the middle of the screen
-	mlx_put_image_to_window(game->mlx, game->win1, game->mini_map.img.mlx_img, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->win1, game->game_screen.mlx_img, 0, 0);
 	if (game->mini_map.map_focus)
 		mlx_put_image_to_window(game->mlx, game->win1, game->mini_map.img.mlx_img, (WIN1_SX/2) - (MAP_W * game->mini_map.tile)/2 ,(WIN1_SY/2) - (MAP_H * game->mini_map.tile)/2);
 	else
