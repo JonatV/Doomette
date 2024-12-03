@@ -51,12 +51,10 @@ static int minimap_shape_square(t_game *game)
 static int minimap_mode_fullscreen(t_game *game)
 {
 	int	i, j, k, l;
-	int tile_size;
-
-	tile_size = game->mini_map.tile;
 	i = 0, j = 0, k = 0, l = 0;
 	if (game->mini_map.map_focus)
 	{
+		game->mini_map.tile = MAP_TILE;
 		game->mini_map.img.mlx_img = mlx_new_image(game->mlx, MAP_W * game->mini_map.tile, MAP_H * game->mini_map.tile);
 		game->mini_map.img.addr = mlx_get_data_addr(game->mini_map.img.mlx_img, &game->mini_map.img.bpp, &game->mini_map.img.line_len, &game->mini_map.img.endian);
 		// todo improvement to not count everything (because not everything will be displayed)
@@ -66,15 +64,15 @@ static int minimap_mode_fullscreen(t_game *game)
 			while (j < MAP_W)
 			{
 				k = 0;
-				while (k < tile_size)
+				while (k < game->mini_map.tile)
 				{
 					l = 0;
-					while (l < tile_size)
+					while (l < game->mini_map.tile)
 					{
 						if (game->map[i][j] == 1)
-							img_pix_put(&game->mini_map.img, l+(j*tile_size), k+(i*tile_size),0xFF0000);
+							img_pix_put(&game->mini_map.img, l+(j*game->mini_map.tile), k+(i*game->mini_map.tile),0xFF0000);
 						else
-							img_pix_put(&game->mini_map.img, l+(j*tile_size), k+(i*tile_size),0x202020);
+							img_pix_put(&game->mini_map.img, l+(j*game->mini_map.tile), k+(i*game->mini_map.tile),0x202020);
 						l++;
 					}
 					k++;
@@ -84,12 +82,14 @@ static int minimap_mode_fullscreen(t_game *game)
 			i++;
 		}
 		// draw the player on the map
+		int player_x = game->player.x;
+		int player_y = game->player.y;
 		k = -1;
 		while (++k < game->player.size)
 		{
 			l = -1;
 			while (++l < game->player.size)
-				img_pix_put(&game->mini_map.img, game->player.x+l, game->player.y+k, 0x00FFFF);
+				img_pix_put(&game->mini_map.img, player_x+l, player_y+k, 0x00FFFF);
 		}
 		//draw the ray representing the player's view
 		draw_rays(game);
@@ -104,6 +104,7 @@ static int minimap_mode_corner(t_game *game)
 
 	if (!(game->mini_map.map_focus))
 	{
+		game->mini_map.tile = MAP_TILE;
 		game->mini_map.img.mlx_img = mlx_new_image(game->mlx, game->mini_map.width, game->mini_map.height);
 		game->mini_map.img.addr = mlx_get_data_addr(game->mini_map.img.mlx_img, &game->mini_map.img.bpp, &game->mini_map.img.line_len, &game->mini_map.img.endian);
 
@@ -131,14 +132,14 @@ static int minimap_mode_corner(t_game *game)
 			i++;
 		}
 		// draw the player on the map in the center of the map
-		start_x = game->mini_map.width/2 - game->player.size/2;
-		start_y = game->mini_map.height/2 - game->player.size/2;
+		int player_x = game->mini_map.width/2 - game->player.size/2;
+		int player_y = game->mini_map.height/2 - game->player.size/2;
 		k = -1;
 		while (++k < game->player.size)
 		{
 			l = -1;
 			while (++l < game->player.size)
-				img_pix_put(&game->mini_map.img, start_x+l, start_y+k, 0x00FFFF);
+				img_pix_put(&game->mini_map.img, player_x+l, player_y+k, 0x00FFFF);
 		}
 		//draw the ray representing the player's view
 		draw_rays(game);
@@ -175,7 +176,7 @@ int	draw_minimap(t_game *game)
 	if (game->mini_map.map_focus)
 		mlx_put_image_to_window(game->mlx, game->win1, game->mini_map.img.mlx_img, (WIN1_SX/2) - (MAP_W * game->mini_map.tile)/2 ,(WIN1_SY/2) - (MAP_H * game->mini_map.tile)/2);
 	else
-		mlx_put_image_to_window(game->mlx, game->win1, game->mini_map.img.mlx_img, 10, 10);
+		mlx_put_image_to_window(game->mlx, game->win1, game->mini_map.img.mlx_img, INNER_BORDER, INNER_BORDER);
 	return (0);
 }
 

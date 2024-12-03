@@ -32,8 +32,10 @@
 #define SOUTH 2
 #define WEST 3
 
-#define PLAYER_SIZE 1
+#define PLAYER_SIZE 2
 #define PLAYER_SPEED 10
+
+#define INNER_BORDER 10
 
 typedef struct s_img
 {
@@ -60,6 +62,9 @@ typedef struct s_mini_map
 	t_img	img;
 	float	width;
 	float	height;
+	int		max_focus_width;
+	int		max_focus_height;
+	int		focus_tile;
 	int		tile; // size of one tile
 	bool	map_focus; // to know wether the map is in big or not
 	bool	is_square; // to know if the map is a square or circle
