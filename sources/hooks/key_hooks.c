@@ -1,11 +1,11 @@
 #include "../../includes/doomette.h"
 
-int	key_win1(int key, void *p)
+int	key_press_win1(int key, void *p)
 {
 	t_game	*game;
 
 	game = (t_game *)p;
-	game->udpate_win1 = true;
+	game->update_win1 = true;
 	printf("Key in Win1 : %x\n",key);
 	if (key==XK_comma)
 	{
@@ -17,7 +17,7 @@ int	key_win1(int key, void *p)
 		game->zoom++;
 		printf("ZOOM = [%d] TILESIZE = [%d]\n", game->zoom, (game->zoom * MAP_TILE)/MAP_H);
 	}
-	move_player(game, key);
+	move_press_player(game, key);
 	if (key==XK_1)
 	{
 		game->mini_map.is_square = !game->mini_map.is_square;
@@ -26,24 +26,19 @@ int	key_win1(int key, void *p)
 	if (key==XK_space) // toggle map focus
 	{
 		game->mini_map.map_focus = !game->mini_map.map_focus;
-		// if (game->mini_map.map_focus)
-		// {
-			// game->player.x = game->player.x/(float)game->mini_map.tile;
-			// game->player.y = game->player.y/(float)game->mini_map.tile;
-			// game->mini_map.tile = MAP_BIG_TILE;
-			// game->player.x *= game->mini_map.tile;
-			// game->player.y *= game->mini_map.tile;
-		// }
-		// else
-		// {
-			// game->player.x = game->player.x/(float)game->mini_map.tile;
-			// game->player.y = game->player.y/(float)game->mini_map.tile;
-			// game->mini_map.tile = MAP_LOW_TILE;
-			// game->player.x *= game->mini_map.tile;
-			// game->player.y *= game->mini_map.tile;
-		// }
 	}
 	if (key==XK_Escape) // exit game
 		close_game(game);
+	return (0);
+}
+
+int	key_release_win1(int key, void *p)
+{
+	t_game	*game;
+
+	game = (t_game *)p;
+	game->update_win1 = false;
+	printf("Key released in Win1 : %x\n",key);
+	move_release_player(game, key);
 	return (0);
 }

@@ -151,9 +151,9 @@ static int minimap_mode_corner(t_game *game)
 int	draw_minimap(t_game *game)
 {
 	// Clean previous image if a change is detected
-	if (!(game->udpate_win1))
-		return (0);
-	game->udpate_win1 = false;
+	// if (!(game->update_win1))
+	// 	return (0);
+	// game->update_win1 = false;
 	if (game->mini_map.img.mlx_img)
 	{
 		mlx_destroy_image(game->mlx, game->mini_map.img.mlx_img);

@@ -72,6 +72,14 @@ typedef struct s_xpm
 	int		y;
 }	t_xpm;
 
+typedef struct s_key_list
+{
+	bool	w;
+	bool	a;
+	bool	s;
+	bool	d;
+}	t_key_list;
+
 typedef struct s_game
 {
 	void		*mlx;	// will be a xvar struct
@@ -87,12 +95,13 @@ typedef struct s_game
 	int			**map;
 
 	// MINI MAP
-	bool		udpate_win1;
+	bool		update_win1;
 	t_mini_map	mini_map;
 	
 	// PLAYER
 	t_player	player;
 	double		last_time;
+	t_key_list	key_list;
 
 	// MISC
 	int			zoom;
@@ -108,7 +117,7 @@ int		draw_square(t_game *game, int side, int x, int y);
 int		draw_vertex(t_img *img, int x0, int y0, int x1, int y1);
 
 /*----------------  optimization_helper.c  ---------------*/
-void	img_pix_put(t_img *img, int x, int y, int color);
+void		img_pix_put(t_img *img, int x, int y, int color);
 
 /*----------------  draw_minimap.c  ---------------*/
 int		draw_minimap(t_game *game);
@@ -123,13 +132,16 @@ int		render_all(t_game *game);
 double		get_time();
 
 /*----------------  player_hooks.c  ---------------*/
-int		move_player(t_game *game, int key);
+int		move_release_player(t_game *game, int key);
+int		move_press_player(t_game *game, int key);
+int		update_player(t_game *game);
 
 /*----------------  close_game.c  ---------------*/
 int		close_game(void *p);
 
 /*----------------  key_hooks.c  ---------------*/
-int		key_win1(int key, void *p);
+int		key_press_win1(int key, void *p);
+int		key_release_win1(int key, void *p);
 
 /*----------------  mouse_hooks.c  ---------------*/
 int		mouse_move_win1(int x, int y, void *p);

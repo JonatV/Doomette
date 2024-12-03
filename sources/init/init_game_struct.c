@@ -12,7 +12,11 @@ int	init_game(t_game **game)
 	init_map(*game);
 	init_minimap(*game);
 	init_player(*game);
-	(*game)->udpate_win1 = true;
+	(*game)->key_list.a = false;
+	(*game)->key_list.d = false;
+	(*game)->key_list.s = false;
+	(*game)->key_list.w = false;
+	(*game)->update_win1 = true;
 	(*game)->zoom = 0;
 	prepare_background(*game);
 	(*game)->game_screen.mlx_img = NULL;
