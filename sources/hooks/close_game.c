@@ -12,7 +12,7 @@ int close_game(void *p)
 	mlx_destroy_image(game->mlx, game->game_screen.mlx_img);
 	mlx_destroy_image(game->mlx, game->bg.mlx_img);
 
-	for (int i = 0; i < MAP_W; i++)
+	for (int i = 0; i < MAP_H; i++)
 		free(game->map[i]);
 	free(game->map);
 

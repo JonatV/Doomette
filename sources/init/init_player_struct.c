@@ -2,9 +2,9 @@
 
 void	init_player(t_game *game)
 {
-	for (int i = 0; i < MAP_W; i++)
+	for (int i = 0; i < MAP_H; i++)
 	{
-		for (int j = 0; j < MAP_H; j++)
+		for (int j = 0; j < MAP_W; j++)
 		{
 			if (game->map[i][j] == 2)
 			{

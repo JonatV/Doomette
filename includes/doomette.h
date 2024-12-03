@@ -20,8 +20,8 @@
 #define WIN1_SX 1200
 #define WIN1_SY 600
 
-#define MAP_W 12
-#define MAP_H 12
+#define MAP_H 20
+#define MAP_W 24
 
 #define MAP_TILE 30
 #define MAP_LOW_TILE 30
