@@ -89,20 +89,29 @@ int	update_player(t_game *game)
 		game->player.pdx = cos(game->player.pa) * move_speed;
 		game->player.pdy = sin(game->player.pa) * move_speed;
 	}
+	int xo = (game->player.pdx < 0) ? -5 : 5;
+	int yo = (game->player.pdy < 0) ? -5 : 5;
+
 	if (game->key_list.w)
 	{
-		if (game->map[(int)(y + game->player.pdy) / tile_size][(int)(x + game->player.pdx) / tile_size] == 0)
+		if (game->map[(int)y / tile_size][(int)(x + xo) / tile_size] == 0)
 		{
-			game->player.x = game->player.x + game->player.pdx;
-			game->player.y = game->player.y + game->player.pdy;
+			game->player.x += game->player.pdx * move_speed;
+		}
+		if (game->map[(int)(y + yo) / tile_size][(int)x / tile_size] == 0)
+		{
+			game->player.y += game->player.pdy * move_speed;
 		}
 	}
 	if (game->key_list.s)
 	{
-		if (game->map[(int)(y - game->player.pdy) / tile_size][(int)(x - game->player.pdx) / tile_size] == 0)
+		if (game->map[(int)y / tile_size][(int)(x - xo) / tile_size] == 0)
 		{
-			game->player.x = game->player.x - game->player.pdx;
-			game->player.y = game->player.y - game->player.pdy;
+			game->player.x -= game->player.pdx * move_speed;
+		}
+		if (game->map[(int)(y - yo) / tile_size][(int)x / tile_size] == 0)
+		{
+			game->player.y -= game->player.pdy * move_speed;
 		}
 	}
 	printf("player x = %f, y = %f, pa = %f\n", game->player.x, game->player.y, game->player.pa);
