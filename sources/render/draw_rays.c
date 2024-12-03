@@ -7,9 +7,10 @@ static float	dist(float ax, float ay, float bx, float by)
 
 int	draw_rays(t_game *game)
 {
-	int r,mx,my,mp,dof; float rx,ry,ra,xo,yo, disT;
+	int r,mx,my,mp,dof, dofMax; float rx,ry,ra,xo,yo, disT;
 	int color;
 	int tile_size = game->mini_map.tile;
+	dofMax = 30;
 	// ra = game->player.pa-DR*30; if (ra < 0) { ra += 2*PI; } if (ra > 2*PI) { ra -= 2*PI; }
 	ra = game->player.pa - DR * 30;
 	ra = fmod(ra, 2*PI);	// Normalize angle
@@ -22,15 +23,15 @@ int	draw_rays(t_game *game)
 		float aTan = -1/tan(ra);
 		if (ra > PI) { ry = (((int)game->player.y / tile_size) * tile_size) - 0.0001; rx = (game->player.y - ry) * aTan + game->player.x; yo = -tile_size; xo = -yo * aTan; }
 		if (ra < PI) { ry = (((int)game->player.y / tile_size) * tile_size) + tile_size; rx = (game->player.y - ry) * aTan + game->player.x; yo = tile_size; xo = -yo * aTan; }
-		if (fabs(ra - 0) < 0.00001 || fabs(ra - PI) < 0.00001) { rx = game->player.x; ry = game->player.y; dof = 10; }
-		while (dof < 10)
+		if (fabs(ra - 0) < 0.00001 || fabs(ra - PI) < 0.00001) { rx = game->player.x; ry = game->player.y; dof = dofMax; }
+		while (dof < dofMax)
 		{
 			mx = (int)(rx) / tile_size;
 			my = (int)(ry) / tile_size;
 			mp = my * MAP_W + mx;
 			// if (mx >= 0 && mx < MAP_W && my >= 0 && my < MAP_H && game->map[my][mx] == 1)
 			if (mp>0 && mp<MAP_W*MAP_H && game->map[mp/MAP_W][mp%MAP_W] == 1)
-			{ dof = 10; hx=rx; hy=ry; disH=dist(game->player.x,game->player.y,hx,hy); }
+			{ dof = dofMax; hx=rx; hy=ry; disH=dist(game->player.x,game->player.y,hx,hy); }
 			else
 			{
 				rx += xo;
@@ -39,20 +40,20 @@ int	draw_rays(t_game *game)
 			}
 		}
 		// vertical lines
-		dof = 0;
+		dof = 0; 
 		float disV = 100000, vx=game->player.x, vy=game->player.y;
 		float nTan = -tan(ra);
 		if (ra > P2 && ra < P3) { rx = (((int)game->player.x / tile_size) * tile_size) - 0.0001; ry = (game->player.x - rx) * nTan + game->player.y; xo = -tile_size; yo = -xo * nTan; }
 		if (ra < P2 || ra > P3) { rx = (((int)game->player.x / tile_size) * tile_size) + tile_size; ry = (game->player.x - rx) * nTan + game->player.y; xo = tile_size; yo = -xo * nTan; }
-		if (fabs(ra - 0) < 0.00001 || fabs(ra - PI) < 0.00001) { rx = game->player.x; ry = game->player.y; dof = 10; }
-		while (dof < 10)
+		if (fabs(ra - 0) < 0.00001 || fabs(ra - PI) < 0.00001) { rx = game->player.x; ry = game->player.y; dof = dofMax; }
+		while (dof < dofMax)
 		{
 			mx = (int)(rx) / tile_size;
 			my = (int)(ry) / tile_size;
 			mp = my * MAP_W + mx;
 			// if (mx >= 0 && mx < MAP_W && my >= 0 && my < MAP_H && game->map[my][mx] == 1)
 			if (mp>0 && mp<MAP_W*MAP_H && game->map[mp/MAP_W][mp%MAP_W] == 1)
-			{ vx=rx; vy=ry; disV=dist(game->player.x,game->player.y,vx,vy); dof = 10; }
+			{ vx=rx; vy=ry; disV=dist(game->player.x,game->player.y,vx,vy); dof = dofMax; }
 			else
 			{
 				rx += xo;
