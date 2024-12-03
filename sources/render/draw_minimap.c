@@ -4,7 +4,8 @@ static int minimap_shape_circle(t_game *game)
 {
 	if (game->mini_map.is_square)
 		return (0);
-	int i, j;
+	int i;
+	int j;
 	// now i will replace points on the img with black to make it look like a circle
 		for(i = 0; i < game->mini_map.height; i++)
 		{
@@ -72,7 +73,7 @@ static int minimap_mode_fullscreen(t_game *game)
 						if (game->map[i][j] == 1)
 							img_pix_put(&game->mini_map.img, l+(j*game->mini_map.tile), k+(i*game->mini_map.tile),0xFF0000);
 						else
-							img_pix_put(&game->mini_map.img, l+(j*game->mini_map.tile), k+(i*game->mini_map.tile),0x202020);
+							img_pix_put(&game->mini_map.img, l+(j*game->mini_map.tile), k+(i*game->mini_map.tile),0x666666);
 						l++;
 					}
 					k++;
@@ -123,7 +124,7 @@ static int minimap_mode_corner(t_game *game)
 					if (game->map[(int)(start_y+i) / game->mini_map.tile][(int)(start_x+j) / game->mini_map.tile] == 1)
 						img_pix_put(&game->mini_map.img, j, i, 0xFF0000); // red
 					else
-						img_pix_put(&game->mini_map.img, j, i, 0x202020); // grey
+						img_pix_put(&game->mini_map.img, j, i, 0x666666); // grey
 				}
 				else
 					img_pix_put(&game->mini_map.img, j, i, 0x000000); // black
@@ -167,6 +168,10 @@ int	draw_minimap(t_game *game)
 	}
 	game->game_screen.mlx_img = mlx_new_image(game->mlx, WIN1_SX, WIN1_SY);
 	game->game_screen.addr = mlx_get_data_addr(game->game_screen.mlx_img, &game->game_screen.bpp, &game->game_screen.line_len, &game->game_screen.endian);
+	// draw the sky
+	img_fill_rect(&game->game_screen, 0, 0, WIN1_SX, WIN1_SY/2, 0x000099);
+	// draw the ground
+	img_fill_rect(&game->game_screen, 0, WIN1_SY/2, WIN1_SX, WIN1_SY/2, 0x666666);
 	// handle minimap modes
 	minimap_mode_fullscreen(game);
 	minimap_mode_corner(game);

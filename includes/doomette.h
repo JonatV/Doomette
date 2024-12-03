@@ -123,6 +123,8 @@ int		draw_vertex(t_img *img, int x0, int y0, int x1, int y1);
 
 /*----------------  optimization_helper.c  ---------------*/
 void		img_pix_put(t_img *img, int x, int y, int color);
+void	img_fill_rect(t_img *img, int x, int y, int width, int height, int color);
+
 
 /*----------------  draw_minimap.c  ---------------*/
 int		draw_minimap(t_game *game);
