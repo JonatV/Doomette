@@ -21,6 +21,7 @@ SRC = main.c \
 		$(HOOKS)close_game.c $(HOOKS)key_hooks.c $(HOOKS)mouse_hooks.c $(HOOKS)init_hooks.c $(HOOKS)player_hooks.c \
 		$(COLORS)background.c \
 		$(RENDER)render_all.c $(RENDER)draw_minimap.c $(RENDER)draw_rays.c $(RENDER)draw_vertex.c $(RENDER)optimization_helper.c \
+		$(DRAWTOOLS)draw_rectangle.c $(DRAWTOOLS)draw_square.c \
 		$(TOOLS)get_time.c
 
 OBJ = $(SRC:.c=.o)
