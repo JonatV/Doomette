@@ -9,6 +9,7 @@
 # include <stdbool.h>
 # include <string.h>
 # include <math.h>
+#include <sys/time.h>
 
 # define DR 0.0174533
 # define PI 3.1415926535
@@ -91,6 +92,7 @@ typedef struct s_game
 	
 	// PLAYER
 	t_player	player;
+	double		last_time;
 
 	// MISC
 	int			zoom;
@@ -116,6 +118,9 @@ int		draw_rays(t_game *game);
 
 /*----------------  render_all.c  ---------------*/
 int		render_all(t_game *game);
+
+/*----------------  get_time.c  ---------------*/
+double		get_time();
 
 /*----------------  player_hooks.c  ---------------*/
 int		move_player(t_game *game, int key);

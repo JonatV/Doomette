@@ -16,5 +16,6 @@ int	init_game(t_game **game)
 	(*game)->zoom = 0;
 	prepare_background(*game);
 	(*game)->game_screen.mlx_img = NULL;
+	(*game)->last_time = get_time();
 	return 0;
 }
