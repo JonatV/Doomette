@@ -72,6 +72,8 @@ static int minimap_mode_fullscreen(t_game *game)
 					{
 						if (game->map[i][j] == 1)
 							img_pix_put(&game->mini_map.img, l+(j*game->mini_map.tile), k+(i*game->mini_map.tile),0xFF0000);
+						else if (game->map[i][j] == 3)
+							img_pix_put(&game->mini_map.img, l+(j*game->mini_map.tile), k+(i*game->mini_map.tile),0x0000FF);
 						else
 							img_pix_put(&game->mini_map.img, l+(j*game->mini_map.tile), k+(i*game->mini_map.tile),0x666666);
 						l++;
@@ -123,6 +125,8 @@ static int minimap_mode_corner(t_game *game)
 				{
 					if (game->map[(int)(start_y+i) / game->mini_map.tile][(int)(start_x+j) / game->mini_map.tile] == 1)
 						img_pix_put(&game->mini_map.img, j, i, 0xFF0000); // red
+					else if (game->map[(int)(start_y+i) / game->mini_map.tile][(int)(start_x+j) / game->mini_map.tile] == 3)
+						img_pix_put(&game->mini_map.img, j, i, 0x0000FF); // blue
 					else
 						img_pix_put(&game->mini_map.img, j, i, 0x666666); // grey
 				}

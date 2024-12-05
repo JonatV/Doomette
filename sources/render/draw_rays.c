@@ -30,7 +30,7 @@ int	draw_rays(t_game *game)
 			my = (int)(ry) / tile_size;
 			mp = my * MAP_W + mx;
 			// if (mx >= 0 && mx < MAP_W && my >= 0 && my < MAP_H && game->map[my][mx] == 1)
-			if (mp>0 && mp<MAP_W*MAP_H && game->map[mp/MAP_W][mp%MAP_W] == 1)
+			if (mp>0 && mp<MAP_W*MAP_H && game->map[mp/MAP_W][mp%MAP_W] > 0)
 			{ dof = dofMax; hx=rx; hy=ry; disH=dist(game->player.x,game->player.y,hx,hy); }
 			else
 			{
@@ -52,7 +52,7 @@ int	draw_rays(t_game *game)
 			my = (int)(ry) / tile_size;
 			mp = my * MAP_W + mx;
 			// if (mx >= 0 && mx < MAP_W && my >= 0 && my < MAP_H && game->map[my][mx] == 1)
-			if (mp>0 && mp<MAP_W*MAP_H && game->map[mp/MAP_W][mp%MAP_W] == 1)
+			if (mp>0 && mp<MAP_W*MAP_H && game->map[mp/MAP_W][mp%MAP_W] > 0)
 			{ vx=rx; vy=ry; disV=dist(game->player.x,game->player.y,vx,vy); dof = dofMax; }
 			else
 			{

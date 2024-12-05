@@ -49,6 +49,32 @@ int move_press_player(t_game *game, int key)
 		game->key_list.a = true;
 	if (key == XK_d)
 		game->key_list.d = true;
+	if (key == XK_e)
+	{
+		// int xo = (game->player.pdx < 0) ? -25 : 25;
+		// int yo = (game->player.pdy < 0) ? -25 : 25;
+		// open door
+		if (game->player.pa >= 0 && game->player.pa < PI/2)
+		{
+			if (game->map[(int)y / tile_size][(int)(x + PLAYER_SPEED) / tile_size] == 3)
+				game->map[(int)y / tile_size][(int)(x + PLAYER_SPEED) / tile_size] = 0;
+		}
+		else if (game->player.pa >= PI/2 && game->player.pa < PI)
+		{
+			if (game->map[(int)(y + PLAYER_SPEED) / tile_size][(int)x / tile_size] == 3)
+				game->map[(int)(y + PLAYER_SPEED) / tile_size][(int)x / tile_size] = 0;
+		}
+		else if (game->player.pa >= PI && game->player.pa < 3 * PI / 2)
+		{
+			if (game->map[(int)y / tile_size][(int)(x - PLAYER_SPEED) / tile_size] == 3)
+				game->map[(int)y / tile_size][(int)(x - PLAYER_SPEED) / tile_size] = 0;
+		}
+		else if (game->player.pa >= 3 * PI / 2 && game->player.pa < 2 * PI)
+		{
+			if (game->map[(int)(y - PLAYER_SPEED) / tile_size][(int)x / tile_size] == 3)
+				game->map[(int)(y - PLAYER_SPEED) / tile_size][(int)x / tile_size] = 0;
+		}
+	}
 	printf("player x = %f, y = %f, pa = %f\n", game->player.x, game->player.y, game->player.pa);
 	return (0);
 }
