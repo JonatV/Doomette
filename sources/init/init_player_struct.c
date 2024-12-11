@@ -14,7 +14,7 @@ void	init_player(t_game *game)
 			}
 		}
 	}
-	game->player.pa = 0;
+	game->player.pa = 0.050469;
 	game->player.pdx = cos(game->player.pa) * 5;
 	game->player.pdy = sin(game->player.pa) * 5;
 	game->player.size = PLAYER_SIZE;
