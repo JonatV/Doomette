@@ -142,6 +142,8 @@ double		get_time();
 int		move_release_player(t_game *game, int key);
 int		move_press_player(t_game *game, int key);
 int		update_player(t_game *game);
+void	rotate_player(t_game *game, float rot_speed);
+// void	rotate_player(t_game *game, float rot_speed, float move_speed);
 
 /*----------------  close_game.c  ---------------*/
 int		close_game(void *p);
