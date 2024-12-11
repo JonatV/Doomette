@@ -7,31 +7,31 @@ static float	dist(float ax, float ay, float bx, float by)
 
 int	draw_rays(t_game *game)
 {
-	int r,mx,my,mp,dof, dofMax; float rx,ry,ra,xo,yo, disT;
+	int r,mx,my,mp,dof;
+	float rx,ry,ra,xo,yo,disT;
 	int color;
 	int tile_size = game->mini_map.tile;
-	dofMax = 30;
 	// ra = game->player.pa-DR*30; if (ra < 0) { ra += 2*PI; } if (ra > 2*PI) { ra -= 2*PI; }
 	ra = game->player.pa - DR * 30;
 	ra = fmod(ra, 2*PI);	// Normalize angle
 	if (ra < 0) ra += 2*PI;
+	// for (r=0.0; r<60; r+=0.5)
 	for (r=0; r<60; r++)
 	{
 		// horizontal lines
 		dof = 0;
 		float disH = 100000, hx=game->player.x, hy=game->player.y;
 		float aTan = -1/tan(ra);
-		if (ra > PI) { ry = (((int)game->player.y / tile_size) * tile_size) - 0.0001; rx = (game->player.y - ry) * aTan + game->player.x; yo = -tile_size; xo = -yo * aTan; }
-		if (ra < PI) { ry = (((int)game->player.y / tile_size) * tile_size) + tile_size; rx = (game->player.y - ry) * aTan + game->player.x; yo = tile_size; xo = -yo * aTan; }
-		if (fabs(ra - 0) < 0.00001 || fabs(ra - PI) < 0.00001) { rx = game->player.x; ry = game->player.y; dof = dofMax; }
-		while (dof < dofMax)
+		if (ra > PI) { ry = (((int)game->player.y / tile_size) * tile_size) - 0.0001; rx = (game->player.y - ry) * aTan + game->player.x; yo = -tile_size; xo = -yo * aTan; } // means player look up
+		if (ra < PI) { ry = (((int)game->player.y / tile_size) * tile_size) + tile_size; rx = (game->player.y - ry) * aTan + game->player.x; yo = tile_size; xo = -yo * aTan; } // means player look down
+		if (fabs(ra - 0) < 0.00001 || fabs(ra - PI) < 0.00001) { rx = game->player.x; ry = game->player.y; dof = DOF_MAX; } // looking straight left or right
+		while (dof < DOF_MAX)
 		{
 			mx = (int)(rx) / tile_size;
 			my = (int)(ry) / tile_size;
 			mp = my * MAP_W + mx;
-			// if (mx >= 0 && mx < MAP_W && my >= 0 && my < MAP_H && game->map[my][mx] == 1)
 			if (mp>0 && mp<MAP_W*MAP_H && game->map[mp/MAP_W][mp%MAP_W] > 0)
-			{ dof = dofMax; hx=rx; hy=ry; disH=dist(game->player.x,game->player.y,hx,hy); }
+			{ dof = DOF_MAX; hx=rx; hy=ry; disH=dist(game->player.x,game->player.y,hx,hy); }
 			else
 			{
 				rx += xo;
@@ -43,17 +43,16 @@ int	draw_rays(t_game *game)
 		dof = 0; 
 		float disV = 100000, vx=game->player.x, vy=game->player.y;
 		float nTan = -tan(ra);
-		if (ra > P2 && ra < P3) { rx = (((int)game->player.x / tile_size) * tile_size) - 0.0001; ry = (game->player.x - rx) * nTan + game->player.y; xo = -tile_size; yo = -xo * nTan; }
-		if (ra < P2 || ra > P3) { rx = (((int)game->player.x / tile_size) * tile_size) + tile_size; ry = (game->player.x - rx) * nTan + game->player.y; xo = tile_size; yo = -xo * nTan; }
-		if (fabs(ra - 0) < 0.00001 || fabs(ra - PI) < 0.00001) { rx = game->player.x; ry = game->player.y; dof = dofMax; }
-		while (dof < dofMax)
+		if (ra > P2 && ra < P3) { rx = (((int)game->player.x / tile_size) * tile_size) - 0.0001; ry = (game->player.x - rx) * nTan + game->player.y; xo = -tile_size; yo = -xo * nTan; } // means player look left
+		if (ra < P2 || ra > P3) { rx = (((int)game->player.x / tile_size) * tile_size) + tile_size; ry = (game->player.x - rx) * nTan + game->player.y; xo = tile_size; yo = -xo * nTan; } // means player look right
+		if (fabs(ra - 0) < 0.00001 || fabs(ra - PI) < 0.00001) { rx = game->player.x; ry = game->player.y; dof = DOF_MAX; } // looking straight up or down
+		while (dof < DOF_MAX)
 		{
 			mx = (int)(rx) / tile_size;
 			my = (int)(ry) / tile_size;
 			mp = my * MAP_W + mx;
-			// if (mx >= 0 && mx < MAP_W && my >= 0 && my < MAP_H && game->map[my][mx] == 1)
 			if (mp>0 && mp<MAP_W*MAP_H && game->map[mp/MAP_W][mp%MAP_W] > 0)
-			{ vx=rx; vy=ry; disV=dist(game->player.x,game->player.y,vx,vy); dof = dofMax; }
+			{ vx=rx; vy=ry; disV=dist(game->player.x,game->player.y,vx,vy); dof = DOF_MAX; }
 			else
 			{
 				rx += xo;
@@ -91,7 +90,6 @@ int	draw_rays(t_game *game)
 				img_pix_put(&game->game_screen, x + w, y, color);
 		}
 
-		// ra += DR; if (ra < 0) { ra += 2*PI; } if (ra > 2*PI) { ra -= 2*PI; }
 		ra += DR;
 		ra = fmod(ra, 2*PI);
 		if (ra < 0) ra += 2*PI;
