@@ -19,9 +19,13 @@
 #define TITLE "doomette"
 #define WIN1_SX 1200
 #define WIN1_SY 600
+#define WIN1_X_CENTER WIN1_SX / 2
+#define WIN1_Y_CENTER WIN1_SY / 2
 
-#define MAP_H 20
+#define MAP_H 13
 #define MAP_W 24
+
+#define DOF_MAX 30
 
 #define MAP_TILE 30
 #define MAP_LOW_TILE 30
@@ -125,7 +129,6 @@ int		draw_vertex(t_img *img, int x0, int y0, int x1, int y1);
 /*----------------  optimization_helper.c  ---------------*/
 void		img_pix_put(t_img *img, int x, int y, int color);
 void	img_fill_rect(t_img *img, int x, int y, int width, int height, int color);
-
 
 /*----------------  draw_minimap.c  ---------------*/
 int		draw_minimap(t_game *game);

@@ -22,5 +22,7 @@ int	init_game(t_game **game)
 	(*game)->game_screen.mlx_img = NULL;
 	(*game)->last_time = get_time();
 	(*game)->delta_time = 0;
+
+	mlx_mouse_hide((*game)->mlx, (*game)->win1);
 	return 0;
 }
