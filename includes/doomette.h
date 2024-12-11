@@ -110,6 +110,7 @@ typedef struct s_game
 
 	// MISC
 	int			zoom;
+	double		delta_time;
 }				t_game;
 
 /*----------------  draw_rectangle.c  ---------------*/

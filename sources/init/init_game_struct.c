@@ -21,5 +21,6 @@ int	init_game(t_game **game)
 	prepare_background(*game);
 	(*game)->game_screen.mlx_img = NULL;
 	(*game)->last_time = get_time();
+	(*game)->delta_time = 0;
 	return 0;
 }
